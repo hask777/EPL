@@ -7,6 +7,12 @@ data = requests.get(url)
 # print(data.text)
 
 soup = BeautifulSoup(data.text)
+
+# here get pure html of the first team status(s)
+# with open("games.html", "w+", encoding="utf-8") as f:
+#     f.write(games)
+# print(games)
+
 standings_table = soup.select('table.stats_table')[0]
 links = standings_table.find_all('a')
 links = [l.get("href") for l in links]
@@ -34,6 +40,8 @@ game_stat = {
                 "date": span.text,
             }
 print(game_stat)
+
+
 
 
 
