@@ -25,36 +25,11 @@ team_games = requests.get(team_url)
 
 # This is full html of page
 games_page = team_games.text
-
-# Get a table
-game_stat = {}
-
-soup = BeautifulSoup(games_page)
-games_table = soup.find('table', id="matchlogs_for")
-table_body = games_table.find('tbody')
-game_time = table_body.find_all('th')[0]
-td = table_body.select('td[data-stat]')[0]
-span = td.find('span', class_="venuetime")
-
-game_stat = {
-                "date": span.text,
-            }
-print(game_stat)
-
-
-
-
-
-
-
-
-
-
-
+# print(games_page)
 # here get pure html of the first team status(s)
-# with open("games.html", "w+", encoding="utf-8") as f:
-#     f.write(games)
-# print(games)
+with open("html/2022_2033.html", "w+", encoding="utf-8") as f:
+    f.write(games_page)
+print(games_page)
 
    
     
