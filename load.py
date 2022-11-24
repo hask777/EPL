@@ -10,14 +10,33 @@ soup = BeautifulSoup(gm, 'html.parser')
 table = soup.find('table', id="matchlogs_for").find('tbody')
 rows = table.find_all('tr')
 
+home_url = "https://fbref.com"
+
 games_dict = []
 games = []
 
 for row in rows:
+    # date
     date_th = row.find('th')
+    # link 0
+    date_link = row.find_all('a')[0]
+    date_link = date_link.get('href')
+    date_link =  f'https://fbref.com{date_link}'
+    # time
     time_td = row.find_all('td')[0]
+    # competition
     comp_td = row.find_all('td')[1]
+    # link 1
+    comp_link = row.find_all('a')[1]
+    comp_link = comp_link.get('href')
+    comp_link =  f'https://fbref.com{comp_link}'
+    # round
     round_td = row.find_all('td')[2]
+    # link 2
+    round_link = row.find_all('a')[2]
+    round_link = round_link.get('href')
+    round_link =  f'https://fbref.com{round_link}'
+    # day
     day_td = row.find_all('td')[3]
     venue_td = row.find_all('td')[4]
     result_td = row.find_all('td')[5]
@@ -36,9 +55,12 @@ for row in rows:
 
     games_dict = {
                 'date'       : date_th.text,
+                'date_link'  : date_link,
                 'start_time' : time_td.text,
                 'comp'       : comp_td.text,
+                'comp_link'  : comp_link,
                 'round'      : round_td.text,
+                'round_link' : round_link,
                 'day_tr'     : day_td.text,
                 'venue'      : venue_td.text,
                 'result'     : result_td.text,
@@ -59,6 +81,6 @@ for row in rows:
     games.append(games_dict)
 
 with open("json/2022_2023.json", 'w', encoding='utf-8') as json_file:
-        json.dump(games, json_file, ensure_ascii = False, indent =4, sort_keys=True)
+        json.dump(games, json_file, ensure_ascii = False, indent =4, sort_keys=False)
 
 
