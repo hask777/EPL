@@ -17,6 +17,7 @@ else:
 
 with open("html/teams.html", 'r', encoding='utf-8') as f:
     page = f.read()
+
 # print(page)
 
 soup = BeautifulSoup(page, 'html.parser')
