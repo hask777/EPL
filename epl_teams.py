@@ -37,6 +37,13 @@ for row in rows:
     team_name = links.text
     if ' ' in team_name:
         team_name = team_name.replace(' ', '-')
+        team_name = team_name.replace('Utd', 'United')
+        if "Nott'ham-Forest" in team_name:
+            team_name = 'Nottingham-Forest'
+    
+    elif 'Wolves' in team_name:
+        team_name = 'Wolverhampton-Wanderers'
+
     else:
         team_name = links.text
 
@@ -56,3 +63,5 @@ for row in rows:
 with open("json/teams.json", 'w', encoding='utf-8') as json_file:
     json.dump(teams, json_file, ensure_ascii = False, indent =4, sort_keys=False)
    
+with open("json/names.json", 'w', encoding='utf-8') as json_file:
+    json.dump(names, json_file, ensure_ascii = False, indent =4, sort_keys=False)
