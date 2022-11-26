@@ -5,7 +5,7 @@ import os.path
 from epl_teams import names
 
 # print(names)
-
+years = []
 
 url = "https://fbref.com/en/comps/9/stats/Premier-League-Stats"
 data = requests.get(url)
